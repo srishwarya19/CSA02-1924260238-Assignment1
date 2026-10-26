@@ -44,6 +44,34 @@ If the same amount is stored as integer paise, each bill is 10 paise.
 4000 × 10 = 40000 paise = ₹400.00
 
 Integer paise gives the exact result for this calculation, provided the integer type does not overflow.
-### 6. Conclusion
+### 7. Alternative Concept: Double Rupees vs Integer Paise
 
-Choosing suitable data types prevents overflow and improves billing accuracy. Integer paise is suitable for money calculations, while `long long` can store large totals.
+An alternative method is to store money as `double` in rupees instead of storing it as `long` in paise.
+
+**Method 1: Double rupees**
+
+The bill is calculated and stored using decimal rupee values. Since floating-point numbers cannot represent every decimal value exactly, small rounding errors may occur. Rounding should be applied when converting the calculated bill into paise or displaying the final amount, according to the billing rules.
+
+**Method 2: Integer paise**
+
+The bill is stored as an integer number of paise. For example, ₹162.50 is stored as 16250 paise. Addition and subtraction remain exact as long as the integer type does not overflow.
+
+**Time Complexity**
+
+Both methods require O(1) time for each addition. Therefore, adding n bills takes O(n) time in either method.
+
+**Space Complexity**
+
+A `double` typically occupies 8 bytes, while a `long` occupies 4 or 8 bytes depending on the system. The actual sizes can be checked using `sizeof()`.
+
+**Rounding Error Comparison**
+
+When many floating-point values are added, small representation errors can accumulate. The total error depends on the values and the order of calculations; it is not necessarily the same for every set of bills.
+
+Integer paise avoids floating-point representation errors during addition, provided the integer total remains within its permitted range.
+
+**Conclusion**
+
+Integer paise is the preferred method for this billing program because it supports exact monetary arithmetic for amounts expressed in whole paise. `double` may be useful for other calculations, but it requires careful handling of rounding when calculating monetary amounts.
+
+
